@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gallery 4 – Mongering Asians</title>
+  <title>Gallery 11 – Mongering Asians</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .nav { display:flex; gap:0.5rem; justify-content:center; margin:1rem 0 0; flex-wrap:wrap; }
-    .nav a { color:var(--muted); text-decoration:none; font-size:0.8rem; padding:0.3rem 0.6rem; border-radius:6px; border:1px solid var(--border); }
+    .nav { display:flex; gap:0.35rem; justify-content:center; margin:1rem 0 0; flex-wrap:wrap; }
+    .nav a { color:var(--muted); text-decoration:none; font-size:0.72rem; padding:0.25rem 0.45rem; border-radius:6px; border:1px solid var(--border); }
     .nav a:hover, .nav a.active { color:var(--text); border-color:var(--accent2); background:#1a1a28; }
     .set { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1.5rem; overflow:hidden; }
     .set-header { padding:0.9rem 1.1rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem; justify-content:space-between; border-bottom:1px solid var(--border); }
@@ -26,8 +26,8 @@
   <header>
     <div class="container">
       <h1>Mongering Asians</h1>
-      <p class="tagline">Multi-image galleries · Gallery 4</p>
-      <nav class="nav" style="display:flex;gap:0.35rem;justify-content:center;margin:1rem 0 0;flex-wrap:wrap"><a href="index.html">Catalog</a><a href="gallery.html">Featured</a><a href="gallery2.html">G2</a><a href="gallery3.html">G3</a><a href="gallery4.html" class="active">G4</a><a href="gallery5.html">G5</a><a href="gallery6.html">G6</a><a href="gallery7.html">G7</a><a href="gallery8.html">G8</a><a href="gallery9.html">G9</a><a href="gallery10.html">G10</a><a href="gallery11.html">G11</a><a href="gallery12.html">G12</a><a href="gallery13.html">G13</a><a href="gallery14.html">G14</a><a href="gallery15.html">G15</a><a href="gallery16.html">G16</a><a href="gallery17.html">G17</a><a href="gallery18.html">G18</a><a href="gallery19.html">G19</a><a href="gallery20.html">G20</a><a href="gallery21.html">G21</a><a href="gallery22.html">G22</a><a href="gallery23.html">G23</a><a href="gallery24.html">G24</a><a href="gallery25.html">G25</a><a href="gallery26.html">G26</a><a href="gallery27.html">G27</a><a href="gallery28.html">G28</a><a href="gallery29.html">G29</a><a href="gallery30.html">G30</a></nav>
+      <p class="tagline">Multi-image galleries · Gallery 11</p>
+      <nav class="nav" id="sitenav"></nav>
     </div>
   </header>
   <main class="container" style="padding-top:1.25rem; padding-bottom:2.5rem;" id="main"></main>
@@ -37,24 +37,33 @@
     </div>
   </footer>
   <script>
+    // build nav 1-30 style
+    (function(){
+      const nav = document.getElementById('sitenav');
+      let html = '<a href="index.html">Catalog</a><a href="gallery.html">Featured</a>';
+      for (let i = 2; i <= 30; i++) {
+        const href = i === 1 ? 'gallery.html' : 'gallery' + i + '.html';
+        const label = 'G' + i;
+        const active = i === 11 ? ' class="active"' : '';
+        html += '<a href="' + href + '"' + active + '>' + label + '</a>';
+      }
+      nav.innerHTML = html;
+    })();
     async function run() {
       const all = await (await fetch('galleries-meta.json')).json();
-      const items = all.slice(40, 60);
+      const items = all.slice(180, 200);
       const main = document.getElementById('main');
+      if (!items.length) {
+        main.innerHTML = '<p style="color:#9a9aaa;text-align:center;padding:2rem">Loading sets… refresh shortly if empty.</p>';
+        return;
+      }
       items.forEach((it) => {
         const set = document.createElement('section');
         set.className = 'set';
         const imgs = (it.images || []).map((src) =>
-          `<a href="${it.link}" target="_blank" rel="noopener"><img src="${src}" alt="" loading="lazy" /></a>`
+          '<a href="' + it.link + '" target="_blank" rel="noopener"><img src="' + src + '" alt="" loading="lazy" /></a>'
         ).join('');
-        set.innerHTML = `
-          <div class="set-header">
-            <h2>${escapeHtml(it.title || 'Untitled')}</h2>
-            <span class="meta">${escapeHtml(it.site || '')}</span>
-            <a href="${it.link}" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="mosaic">${imgs}</div>
-        `;
+        set.innerHTML = '<div class="set-header"><h2>' + escapeHtml(it.title || 'Untitled') + '</h2><span class="meta">' + escapeHtml(it.site || '') + '</span><a href="' + it.link + '" target="_blank" rel="noopener">Open</a></div><div class="mosaic">' + imgs + '</div>';
         main.appendChild(set);
       });
     }
