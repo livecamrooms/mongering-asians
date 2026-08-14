@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery 36 – Mongering Asians</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .nav { display:flex; gap:0.3rem; justify-content:center; margin:1rem 0 0; flex-wrap:wrap; }
+    .nav a { color:var(--muted); text-decoration:none; font-size:0.68rem; padding:0.22rem 0.4rem; border-radius:5px; border:1px solid var(--border); }
+    .nav a:hover, .nav a.active { color:var(--text); border-color:var(--accent2); background:#1a1a28; }
+    .set { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1.5rem; overflow:hidden; }
+    .set-header { padding:0.9rem 1.1rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem; justify-content:space-between; border-bottom:1px solid var(--border); }
+    .set-header h2 { font-size:1rem; font-weight:600; flex:1; min-width:180px; }
+    .set-header .meta { color:var(--muted); font-size:0.8rem; }
+    .set-header a { text-decoration:none; font-size:0.8rem; font-weight:600; padding:0.4rem 0.85rem; border-radius:7px; background:var(--accent); color:#fff; white-space:nowrap; }
+    .set-header a:hover { background:#e63e5c; }
+    .mosaic { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:3px; }
+    .mosaic a { display:block; aspect-ratio:16/9; overflow:hidden; background:#111; }
+    .mosaic img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.2s; }
+    .mosaic a:hover img { transform:scale(1.04); }
+    @media (min-width:700px) { .mosaic { grid-template-columns:repeat(3, 1fr); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Mongering Asians</h1>
+      <p class="tagline">Multi-image galleries · Gallery 36</p>
+      <nav class="nav" id="sitenav"></nav>
+    </div>
+  </header>
+  <main class="container" style="padding-top:1.25rem; padding-bottom:2.5rem;" id="main"></main>
+  <footer><div class="container"><p class="small">Multi-image sets. Open uses tracking links.</p></div></footer>
+  <script>
+    (function(){
+      const nav = document.getElementById('sitenav');
+      let html = '<a href="index.html">Catalog</a><a href="gallery.html">Featured</a>';
+      for (let i = 2; i <= 60; i++) {
+        const active = i === 36 ? ' class="active"' : '';
+        html += '<a href="gallery' + i + '.html"' + active + '>G' + i + '</a>';
+      }
+      nav.innerHTML = html;
+    })();
+    async function run() {
+      const all = await (await fetch('galleries-meta.json')).json();
+      const items = all.slice(680, 700);
+      const main = document.getElementById('main');
+      if (!items.length) {
+        main.innerHTML = '<p style="color:#9a9aaa;text-align:center;padding:2rem">Sets loading… refresh soon if empty.</p>';
+        return;
+      }
+      items.forEach((it) => {
+        const set = document.createElement('section');
+        set.className = 'set';
+        const imgs = (it.images || []).map((src) =>
+          '<a href="' + it.link + '" target="_blank" rel="noopener"><img src="' + src + '" alt="" loading="lazy" /></a>'
+        ).join('');
+        set.innerHTML = '<div class="set-header"><h2>' + escapeHtml(it.title||'Untitled') + '</h2><span class="meta">' + escapeHtml(it.site||'') + '</span><a href="' + it.link + '" target="_blank" rel="noopener">Open</a></div><div class="mosaic">' + imgs + '</div>';
+        main.appendChild(set);
+      });
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    run();
+  </script>
+</body>
+</html>
