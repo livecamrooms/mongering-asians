@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gallery 2 – Mongering Asians</title>
+  <title>Gallery 4 – Mongering Asians</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .nav { display:flex; gap:0.6rem; justify-content:center; margin:1rem 0 0; flex-wrap:wrap; }
-    .nav a { color:var(--muted); text-decoration:none; font-size:0.85rem; padding:0.35rem 0.7rem; border-radius:6px; border:1px solid var(--border); }
+    .nav { display:flex; gap:0.5rem; justify-content:center; margin:1rem 0 0; flex-wrap:wrap; }
+    .nav a { color:var(--muted); text-decoration:none; font-size:0.8rem; padding:0.3rem 0.6rem; border-radius:6px; border:1px solid var(--border); }
     .nav a:hover, .nav a.active { color:var(--text); border-color:var(--accent2); background:#1a1a28; }
     .set { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1.5rem; overflow:hidden; }
     .set-header { padding:0.9rem 1.1rem; display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem; justify-content:space-between; border-bottom:1px solid var(--border); }
@@ -19,44 +19,39 @@
     .mosaic a { display:block; aspect-ratio:16/9; overflow:hidden; background:#111; }
     .mosaic img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.2s; }
     .mosaic a:hover img { transform:scale(1.04); }
-    @media (min-width:700px) {
-      .mosaic { grid-template-columns:repeat(3, 1fr); }
-    }
+    @media (min-width:700px) { .mosaic { grid-template-columns:repeat(3, 1fr); } }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
       <h1>Mongering Asians</h1>
-      <p class="tagline">Multi-image galleries · Page 2 of 2 extra sets</p>
+      <p class="tagline">Multi-image galleries · Gallery 4</p>
       <nav class="nav">
         <a href="index.html">Catalog</a>
         <a href="gallery.html">Featured</a>
-        <a href="gallery2.html" class="active">Gallery 2</a>
+        <a href="gallery2.html">Gallery 2</a>
         <a href="gallery3.html">Gallery 3</a>
-        <a href="gallery4.html">Gallery 4</a>
+        <a href="gallery4.html" class="active">Gallery 4</a>
         <a href="gallery5.html">Gallery 5</a>
       </nav>
     </div>
   </header>
-
   <main class="container" style="padding-top:1.25rem; padding-bottom:2.5rem;" id="main"></main>
-
   <footer>
     <div class="container">
       <p class="small">Multi-image sets extracted from content ZIPs. Open uses tracking links.</p>
     </div>
   </footer>
-
   <script>
     async function run() {
       const all = await (await fetch('galleries-meta.json')).json();
-      const items = all.slice(0, 20); // first 20 of the 40
+      const items = all.slice(40, 60);
       const main = document.getElementById('main');
-      items.forEach((it, idx) => {
+      items.forEach((it) => {
         const set = document.createElement('section');
         set.className = 'set';
-        const imgs = (it.images || []).map((src, i) =>
+        const imgs = (it.images || []).map((src) =>
           `<a href="${it.link}" target="_blank" rel="noopener"><img src="${src}" alt="" loading="lazy" /></a>`
         ).join('');
         set.innerHTML = `
