@@ -62,7 +62,6 @@
         : `<div class="placeholder">No preview</div>`;
 
       const primaryHref = it.gallery || it.link;
-      const secondaryHref = it.download && it.download !== it.thumb ? it.download : null;
 
       card.innerHTML = `
         <div class="thumb-wrap">
@@ -74,7 +73,6 @@
           <div class="meta">${escapeHtml(it.siteClean)}${it.date ? ' · ' + formatDate(it.date) : ''}</div>
           <div class="actions">
             <a class="btn-primary" href="${escapeAttr(primaryHref)}" target="_blank" rel="noopener">Open</a>
-            ${secondaryHref ? `<a class="btn-secondary" href="${escapeAttr(secondaryHref)}" target="_blank" rel="noopener">DL</a>` : ''}
           </div>
         </div>
       `;
