@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Featured Gallery – Mongering Asians</title>
+  <meta name="description" content="Featured high-res previews with tracking links." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .nav {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1rem 0 0;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--text);
+      border-color: var(--accent2);
+      background: #1a1a28;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      padding-bottom: 3rem;
+    }
+    .featured-grid .card .thumb-wrap {
+      aspect-ratio: 16/9;
+    }
+    .featured-grid .card-body h3 {
+      -webkit-line-clamp: 3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Mongering Asians</h1>
+      <p class="tagline">Featured high-res previews</p>
+      <nav class="nav">
+        <a href="index.html">Catalog</a>
+        <a href="gallery.html" class="active">Featured Gallery</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="count" style="margin: 1.25rem 0 1rem;">20 featured sets · click through to join</p>
+    <section class="featured-grid" id="grid">
+      <!-- cards injected -->
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="small">Thumbnails extracted from content sets. Links use tracking IDs.</p>
+    </div>
+  </footer>
+
+  <script>
+    const items = [
+      { title: "Miao - ミャオ (079)", site: "creampieinasia", img: "thumbs/thumb1.jpg", link: "https://join.creampieinasia.com/track/MjQxNjcyNC4xLjIzLjQyLjAuOTMzNi4wLjAuMA" },
+      { title: "Vipada (981)", site: "thaigirlswild", img: "thumbs/thumb2.jpg", link: "https://join.thaigirlswild.com/track/MjQxNjcyNC4xLjExLjExLjAuOTMzNS4wLjAuMA" },
+      { title: "Sexy Thai Teeny Bopper Strips For Her Man", site: "mongerinasia", img: "thumbs/thumb3.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTMzNC4wLjAuMA" },
+      { title: "Thai Girl With Blue Hair And Cosplay", site: "mongerinasia", img: "thumbs/thumb4.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTMzMy4wLjAuMA" },
+      { title: "Luxurious Ass to Mouth for Asian Teen", site: "analjesse", img: "thumbs/thumb5.jpg", link: "https://join.analjesse.com/track/MjQxNjcyNC4xLjI1LjQ3LjAuOTMzMi4wLjAuMA" },
+      { title: "Carrot 2 - キャロット 2", site: "creampieinasia", img: "thumbs/thumb6.jpg", link: "https://join.creampieinasia.com/track/MjQxNjcyNC4xLjIzLjQyLjAuOTIyNi4wLjAuMA" },
+      { title: "Daisy (977)", site: "thaigirlswild", img: "thumbs/thumb7.jpg", link: "https://join.thaigirlswild.com/track/MjQxNjcyNC4xLjExLjExLjAuOTIyNS4wLjAuMA" },
+      { title: "Rungtawan", site: "creampiethais", img: "thumbs/thumb8.jpg", link: "https://join.creampiethais.com/track/MjQxNjcyNC4xLjEuMS4wLjkyMjQuMC4wLjA" },
+      { title: "Beautiful Skinny 18-Year-Old Hooker Shaves in Shower", site: "mongerinasia", img: "thumbs/thumb9.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTIyMy4wLjAuMA" },
+      { title: "Nung (STS)", site: "mongerinasia", img: "thumbs/thumb10.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTE5My4wLjAuMA" },
+      { title: "Bubble-Butt Teen With Braces Corked", site: "mongerinasia", img: "thumbs/thumb11.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTE5Mi4wLjAuMA" },
+      { title: "Pickup and Fuck - Hippie Girl Anal ATM", site: "analjesse", img: "thumbs/thumb12.jpg", link: "https://join.analjesse.com/track/MjQxNjcyNC4xLjI1LjQ3LjAuOTE5MS4wLjAuMA" },
+      { title: "Hana (TGW)", site: "thaigirlswild", img: "thumbs/thumb13.jpg", link: "https://join.thaigirlswild.com/track/MjQxNjcyNC4xLjExLjExLjAuOTE2Ni4wLjAuMA" },
+      { title: "Nudao", site: "creampiethais", img: "thumbs/thumb14.jpg", link: "https://join.creampiethais.com/track/MjQxNjcyNC4xLjEuMS4wLjkxNjUuMC4wLjA" },
+      { title: "Sexy Thai MILF Gets Unexpected Creampie", site: "mongerinasia", img: "thumbs/thumb15.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTE2NC4wLjAuMA" },
+      { title: "Green Haired Thai Girl Plays With Cum", site: "mongerinasia", img: "thumbs/thumb16.jpg", link: "https://join.mongerinasia.com/track/MjQxNjcyNC4xLjI0LjQ0LjAuOTE2My4wLjAuMA" },
+      { title: "Pickup and Fuck - Pink Bikini Anal", site: "analjesse", img: "thumbs/thumb17.jpg", link: "https://join.analjesse.com/track/MjQxNjcyNC4xLjI1LjQ3LjAuOTE2Mi4wLjAuMA" },
+      { title: "Sprite (CIA)", site: "creampieinasia", img: "thumbs/thumb18.jpg", link: "https://join.creampieinasia.com/track/MjQxNjcyNC4xLjIzLjQyLjAuOTEzNy4wLjAuMA" },
+      { title: "Miki (965)", site: "thaigirlswild", img: "thumbs/thumb19.jpg", link: "https://join.thaigirlswild.com/track/MjQxNjcyNC4xLjExLjExLjAuOTEzNi4wLjAuMA" },
+      { title: "Paweenuch", site: "creampiethais", img: "thumbs/thumb20.jpg", link: "https://join.creampiethais.com/track/MjQxNjcyNC4xLjEuMS4wLjkxMzUuMC4wLjA" }
+    ];
+
+    const grid = document.getElementById('grid');
+    items.forEach(it => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="thumb-wrap">
+          <span class="badge content">Featured</span>
+          <img src="${it.img}" alt="" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <h3>${it.title}</h3>
+          <div class="meta">${it.site}</div>
+          <div class="actions">
+            <a class="btn-primary" href="${it.link}" target="_blank" rel="noopener">Open</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
