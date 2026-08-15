@@ -48,7 +48,7 @@
   const nav=document.getElementById('sitenav');
   let html='<a href="index.html">Catalog</a><a href="gallery.html">Featured</a>';
   for(let i=2;i<=100;i++){
-    html+='<a href="gallery'+i+'.html"'+(i===84?' class="active"':'')+'>G'+i+'</a>';
+    html+='<a href="gallery'+i+'.html"'+(i===61?' class="active"':'')+'>G'+i+'</a>';
   }
   nav.innerHTML=html;
   const jump=document.getElementById('jump');
@@ -61,12 +61,12 @@
 })();
 async function run(){
   const all=await(await fetch('galleries-meta.json')).json();
-  const items=all.slice(1640,1660);
+  const items=all.slice(1640, 1660);
   const main=document.getElementById('main');
   if(!items.length){main.innerHTML='<p style="color:#9a9aaa;text-align:center;padding:2rem">Sets loading…</p>';return}
   items.forEach(it=>{
     const set=document.createElement('section');set.className='set';
-    const imgs=(it.images||[]).map(src=>'<a href="'+it.link+'" target="_blank" rel="noopener"><img src="'+src+'" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"/></a>').join('');
+    const imgs=(it.images||[]).map(src=>'<a href="'+it.link+'" target="_blank" rel="noopener"><img src="'+src+'" alt="' + esc((it.title || 'Gallery image') + (it.site ? ' – ' + it.site : '')) + '" loading="lazy" onerror="this.parentElement.style.display=\'none\'"/></a>').join('');
     set.innerHTML='<div class="set-header"><h2>'+esc(it.title||'Untitled')+'</h2><span class="meta">'+esc(it.site||'')+'</span><a href="'+it.link+'" target="_blank" rel="noopener">Open</a></div><div class="mosaic">'+imgs+'</div>';
     main.appendChild(set);
   });

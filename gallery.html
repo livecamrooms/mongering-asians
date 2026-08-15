@@ -93,7 +93,7 @@
       card.innerHTML = `
         <div class="thumb-wrap">
           <span class="badge content">Featured</span>
-          <img src="${it.img}" alt="" loading="lazy" />
+          <img src="${it.img}" alt="' + esc((it.title || 'Gallery image') + (it.site ? ' – ' + it.site : '')) + '" loading="lazy" />
         </div>
         <div class="card-body">
           <h3>${it.title}</h3>

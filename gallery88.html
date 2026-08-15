@@ -66,7 +66,7 @@ async function run(){
   if(!items.length){main.innerHTML='<p style="color:#9a9aaa;text-align:center;padding:2rem">Sets loading…</p>';return}
   items.forEach(it=>{
     const set=document.createElement('section');set.className='set';
-    const imgs=(it.images||[]).map(src=>'<a href="'+it.link+'" target="_blank" rel="noopener"><img src="'+src+'" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"/></a>').join('');
+    const imgs=(it.images||[]).map(src=>'<a href="'+it.link+'" target="_blank" rel="noopener"><img src="'+src+'" alt="' + esc((it.title || 'Gallery image') + (it.site ? ' – ' + it.site : '')) + '" loading="lazy" onerror="this.parentElement.style.display=\'none\'"/></a>').join('');
     set.innerHTML='<div class="set-header"><h2>'+esc(it.title||'Untitled')+'</h2><span class="meta">'+esc(it.site||'')+'</span><a href="'+it.link+'" target="_blank" rel="noopener">Open</a></div><div class="mosaic">'+imgs+'</div>';
     main.appendChild(set);
   });
