@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://livecamrooms.github.io/mongering-asians/sitemap.xml
